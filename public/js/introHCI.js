@@ -27,4 +27,19 @@ function addProjectDetails(e) {
 	var idNumber = projectID.substr('project'.length);
 
 	console.log("User clicked on project " + idNumber);
+	//call AJAX using get
+	// what we want is /project/idNumber/
+	$.get("/project/" + idNumber, addProject);
 }
+
+//write addProject function
+function addProject(result) {
+	var projectHTML = '<div class="thumbnail">' +
+    '<p>' + result['title'] + '</p>' +
+    '<p><small>' + result['date'] + '</small></p>' +
+    '<img src="' + result['image'] + '" class="detailsImage">' +
+    '<p><small>' + result['summary'] + '</small></p></div>'; 
+	// jQuery to select correct project id and add html
+	$('#project' + result.id + ' .details').html(projectHTML);
+}
+
